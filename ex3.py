@@ -1,7 +1,7 @@
 # Two loops cover almost everything: `for` when you know what you're looping
 # over, and `while` when you loop until some condition changes.
 
-fruits = ["apple", "banana", "cherry"]
+fruits = ["apple", "banana", "cherry", "durian"]
 
 # A `for` loop over a list visits each item in turn. This is the Python
 # mental-model shift: you loop over the ITEMS themselves, not over a counter
