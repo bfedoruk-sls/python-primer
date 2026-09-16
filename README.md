@@ -1,7 +1,7 @@
 # Python Primer
 
 A short, hands-on introduction to Python for students with no programming
-background. Six small example files, each teaching one idea, that build
+background. Nine small example files, each teaching one idea, that build
 toward a capstone project: a working command-line **Wordle**.
 
 ## Who this is for
@@ -34,11 +34,13 @@ life nicer.
 |---|---|---|
 | `ex1.py` | Input and output | Read from the user and print formatted results |
 | `ex2.py` | Types, conversion, decisions | Turn text into numbers; branch with `if` |
-| `ex3.py` | Loops | Repeat work with `for` and `while` |
-| `ex4.py` | Functions | Package logic and return a result |
-| `ex5.py` | Lists and dictionaries | Store collections and look things up by key |
-| `ex6.py` | Reading and writing files | Save data to disk and read it back into a list |
-| `ex7.py` | Classes and objects | Bundle data and behaviour together |
+| `ex3.py` | Loops | Repeat work with `for` and `while`; steer with `break`/`continue` |
+| `ex4.py` | Strings | Index, slice, and walk through text by position |
+| `ex5.py` | Functions | Package logic and return a result |
+| `ex6.py` | Lists and dictionaries | Store collections and look things up by key |
+| `ex7.py` | Reading and writing files | Save data to disk and read it back into a list |
+| `ex8.py` | Classes and objects | Bundle data and behaviour together |
+| `ex9.py` | Errors and `try`/`except` | Catch bad input instead of crashing |
 | `proj.py` | Capstone project | Build a playable Wordle |
 | `words.txt` | Word list (data) | The five-letter words the capstone draws from |
 
@@ -71,6 +73,20 @@ time than anything else here. Python's errors are shorter than most
 languages': the **last line** names the problem, and the lines above it
 point at where it happened.
 
+## Using modules
+
+Some tools aren't built into the language — you switch them on with `import`.
+The capstone starts with `import random` so it can pick a random secret word:
+
+```
+import random
+secret = random.choice(word_list)   # one random item from a list
+roll = random.randint(1, 6)         # a random whole number from 1 to 6
+```
+
+The standard library ships with dozens of these modules (`math`, `datetime`,
+and many more). `import` is simply how you turn one on.
+
 ## The capstone project
 
 `proj.py` is a guided scaffold for building **Wordle**: the program picks a
@@ -81,12 +97,14 @@ the word but misplaced (`?`), and which aren't in the word at all (`.`).
 Each concept from the examples powers a piece of it:
 
 - Input and f-strings (`ex1`) → prompt for each guess and print the feedback
-- Conversion and `if`/`elif`/`else` (`ex2`) → check a guess is a legal word
-- Loops (`ex3`) → run the round for up to six guesses
-- Functions that return a value (`ex4`) → the scoring function
-- Lists, dicts, and the `.get()` counting pattern (`ex5`) → counting the secret's letters
-- Reading a file into a list (`ex6`) → loading the word list from `words.txt`
-- Classes (`ex7`) → the `Game` object that tracks the round
+- Conversion and `if`/`elif`/`else` (`ex2`) → compare and branch
+- Loops, `break`/`continue` (`ex3`) → run the round and re-prompt on a bad guess
+- String indexing (`ex4`) → compare the guess and the secret letter by letter
+- Functions that return a value (`ex5`) → the scoring function
+- Lists, dicts, and the `.get()` counting pattern (`ex6`) → counting the secret's letters
+- Reading a file into a list (`ex7`) → loading the word list from `words.txt`
+- Classes (`ex8`) → the `Game` object that tracks the round
+- `try`/`except` (`ex9`) → a guess prompt that won't crash on odd input
 
 The word list lives in `words.txt` — one word per line, currently a few
 hundred five-letter words — and `proj.py` reads it in at startup, so growing
@@ -96,7 +114,7 @@ bit — handling repeated letters so you never light up more copies of a letter
 than the secret actually contains — is spelled out as a two-pass hint in the
 file. Build one piece at a time, running after each.
 
-## Errors you may hit
+## Errors you will probably hit
 
 **`IndentationError`** — Python groups code by indentation. Every line inside
 an `if`, loop, function, or class must be indented by the same amount. Mixing
@@ -113,6 +131,10 @@ are two different names.
 
 **`IndexError: string index out of range`** — you asked for a position that
 doesn't exist, e.g. `word[5]` on a five-letter word (its positions are 0–4).
+
+Some errors are bugs to fix; others — like a user typing letters where you
+expected a number — you can't prevent. For those, `ex9` shows how to catch the
+error with `try`/`except` so the program recovers instead of crashing.
 
 ## Getting help
 
